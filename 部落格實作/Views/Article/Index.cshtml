@@ -1,0 +1,29 @@
+﻿@model 部落格實作.ViewModels.ArticleIndexViewModel
+
+@{
+    ViewBag.Title = "文章首頁";
+}
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/jQuery/Article/ArticleList.js")
+}
+@*------------人氣文章表單Start------------*@
+<div id="PopularityListBlock">
+    @Html.Action("ShowPopularity", "Article")
+</div>
+@*------------人氣文章表單End------------*@
+<div id="ArticleListBolock">
+    @Html.Action("List", "Article")
+</div>
+@if (User.Identity.IsAuthenticated)
+{
+    //新增文章按鈕，並設定使用AJAX取得內容後開啟跳窗
+    @Ajax.ActionLink("新增文章", "Create", "Article", null, new AjaxOptions { UpdateTargetId = "CreateArticleModal", InsertionMode = InsertionMode.Replace },
+        new { @class = "btn btn-primary", @data_toggle = "modal", @data_target = "#CreateArticleModal" })
+    <div class="modal fade" id="CreateArticleModal" tabindex="-1" role="dialog" aria-labelledby="CreateArticleModalLabel" aria-hidden="true"></div>
+}
+else
+{
+    <text>要新增文章請先</text>
+    @Html.ActionLink("登入", "Login", "Members")
+}

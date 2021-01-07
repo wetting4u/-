@@ -1,0 +1,44 @@
+﻿@model 部落格實作.ViewModels.MembersLoginViewModel
+
+@{
+    ViewBag.Title = "登入";
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<div class="page-header">
+    <h1>登入</h1>
+</div>
+<div class="form-horizontal">
+    @using (Html.BeginForm())
+    {
+        @*顯示彙總的表單驗證的錯誤訊息*@
+        <div class="alert alert-warning">
+            @Html.ValidationSummary()
+        </div>
+        @*產生登入帳號密碼表單內容*@
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.Account, new { @class = "col-xs-4 col-md-1 form-label" })
+            <div class="col-xs-8 col-md-11">
+                @Html.TextBoxFor(Model => Model.Account, new { @class = "form-control" })
+                @Html.ValidationMessageFor(Model => Model.Account, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.Password, new { @class = "col-xs-4 col-md-1 form-label" })
+            <div class="col-xs-8 col-md-11">
+                @Html.PasswordFor(Model => Model.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(Model => Model.Password, null, new { @class = "label label-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-10">
+                <input class="btn btn-primary" type="submit" value="登入" />
+                @Html.ActionLink("去註冊", "Register")
+            </div>
+        </div>
+    }
+</div>
+
+
